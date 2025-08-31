@@ -34,7 +34,7 @@ export const Header = () => {
               </Button>
               
               <h1 className="text-2xl font-bold tracking-tight">
-                <span className="gradient-primary bg-clip-text text-transparent">MEN'S LUXE</span>
+                <span className="text-primary">MEN'S LUXE</span>
               </h1>
             </div>
 
