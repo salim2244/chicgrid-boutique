@@ -34,7 +34,7 @@ export const Header = () => {
               </Button>
               
               <h1 className="text-2xl font-bold tracking-tight">
-                <span className="gradient-primary bg-clip-text text-transparent">LUXE</span>
+                <span className="gradient-primary bg-clip-text text-transparent">MEN'S LUXE</span>
               </h1>
             </div>
 
@@ -43,12 +43,12 @@ export const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-foreground hover:text-primary transition-smooth">
-                    {categories.mens.title}
+                    {categories.collection.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-6 w-[400px] bg-popover">
                       <div className="grid gap-2">
-                        {categories.mens.subcategories.map((item) => (
+                        {categories.collection.subcategories.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
@@ -64,12 +64,12 @@ export const Header = () => {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-foreground hover:text-primary transition-smooth">
-                    {categories.womens.title}
+                    {categories.clothing.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-6 w-[400px] bg-popover">
                       <div className="grid gap-2">
-                        {categories.womens.subcategories.map((item) => (
+                        {categories.clothing.subcategories.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}

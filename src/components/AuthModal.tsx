@@ -42,7 +42,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
       <DialogContent className="sm:max-w-md bg-card border shadow-hero">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-semibold">
-            Welcome to LUXE
+            Welcome to MEN'S LUXE
           </DialogTitle>
         </DialogHeader>
 

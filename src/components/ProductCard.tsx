@@ -81,16 +81,20 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <span className="text-sm text-muted-foreground">({product.reviews})</span>
         </div>
 
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg font-bold text-foreground">
-            ${product.price}
-          </span>
-          {product.originalPrice && (
-            <span className="text-sm text-muted-foreground line-through">
-              ${product.originalPrice}
+        <div className="price-brand-section mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-lg font-bold text-foreground">
+              ₹{product.price.toLocaleString()}
             </span>
-          )}
+            {product.originalPrice && (
+              <span className="text-sm text-muted-foreground line-through">
+                ₹{product.originalPrice.toLocaleString()}
+              </span>
+            )}
+          </div>
+          <div className="text-sm text-primary font-medium">
+            {product.brand}
+          </div>
         </div>
 
         {/* Colors */}

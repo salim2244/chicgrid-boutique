@@ -10,10 +10,10 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold">LUXE</h3>
+            <h3 className="text-2xl font-bold">MEN'S LUXE</h3>
             <p className="text-primary-foreground/80 leading-relaxed">
-              Redefining luxury fashion with timeless elegance and contemporary style. 
-              Discover pieces that speak to your unique sense of style.
+              India's premium men's fashion destination featuring top brands like Tommy Hilfiger, Jack & Jones, 
+              and more. Quality clothing at unbeatable prices.
             </p>
             <div className="flex space-x-4">
               <Button size="icon" variant="ghost" className="hover:bg-primary-light">
@@ -99,11 +99,11 @@ export const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-sm text-primary-foreground/80">
                 <Mail className="h-4 w-4" />
-                <span>hello@luxefashion.com</span>
+                <span>hello@mensluxe.in</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-primary-foreground/80">
                 <MapPin className="h-4 w-4" />
-                <span>New York, NY 10001</span>
+                <span>Mumbai, India 400001</span>
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export const Footer = () => {
         <div className="border-t border-primary-light pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-primary-foreground/60 text-sm">
-              © 2024 LUXE Fashion. All rights reserved.
+              © 2024 MEN'S LUXE. All rights reserved. Made in India.
             </p>
             
             <div className="flex space-x-6 text-sm">

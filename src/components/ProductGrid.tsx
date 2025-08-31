@@ -7,10 +7,10 @@ export const ProductGrid = () => {
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center">
           <h2 className="text-4xl font-bold mb-4">Featured Collection</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Discover our handpicked selection of premium pieces that define contemporary luxury and timeless elegance.
+            Discover premium men's fashion from top brands like Tommy Hilfiger, Jack & Jones, and more.
           </p>
         </div>
 

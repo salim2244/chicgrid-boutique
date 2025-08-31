@@ -14,17 +14,17 @@ export const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-          Luxury Fashion
-          <br />
-          <span className="gradient-secondary bg-clip-text text-transparent">
-            Redefined
-          </span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto leading-relaxed">
-          Discover our curated collection of premium clothing that defines modern elegance and timeless style.
-        </p>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            Men's Fashion
+            <br />
+            <span className="gradient-secondary bg-clip-text text-transparent">
+              Store
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto leading-relaxed">
+            Discover premium men's clothing from top brands like Tommy Hilfiger, Jack & Jones, and more at unbeatable prices.
+          </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
@@ -46,16 +46,16 @@ export const Hero = () => {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-8 mt-16 max-w-md mx-auto">
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">500+</div>
-            <div className="text-sm text-white/80">Premium Items</div>
+            <div className="text-2xl font-bold text-secondary">200+</div>
+            <div className="text-sm text-white/80">Men's Items</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">50K+</div>
-            <div className="text-sm text-white/80">Happy Customers</div>
+            <div className="text-2xl font-bold text-secondary">8</div>
+            <div className="text-sm text-white/80">Top Brands</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">4.9★</div>
-            <div className="text-sm text-white/80">Average Rating</div>
+            <div className="text-2xl font-bold text-secondary">4.8★</div>
+            <div className="text-sm text-white/80">Customer Rating</div>
           </div>
         </div>
       </div>
