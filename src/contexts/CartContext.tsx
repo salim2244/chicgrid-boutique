@@ -3,11 +3,13 @@ import { Product } from '@/data/mockData';
 
 export interface CartItem extends Product {
   quantity: number;
+  selectedColor?: string;
+  selectedSize?: string;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, selectedColor?: string, selectedSize?: string) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -21,20 +23,26 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product) => {
-    console.log('Adding to cart:', product);
+  const addToCart = (product: Product, selectedColor?: string, selectedSize?: string) => {
+    console.log('Adding to cart:', product, { selectedColor, selectedSize });
     setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
+      const existingItem = prev.find(item => 
+        item.id === product.id && 
+        item.selectedColor === selectedColor && 
+        item.selectedSize === selectedSize
+      );
       if (existingItem) {
         const updated = prev.map(item =>
-          item.id === product.id
+          item.id === product.id && 
+          item.selectedColor === selectedColor && 
+          item.selectedSize === selectedSize
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
         console.log('Updated cart (existing item):', updated);
         return updated;
       }
-      const newCart = [...prev, { ...product, quantity: 1 }];
+      const newCart = [...prev, { ...product, quantity: 1, selectedColor, selectedSize }];
       console.log('Updated cart (new item):', newCart);
       return newCart;
     });

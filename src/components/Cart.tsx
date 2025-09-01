@@ -39,8 +39,8 @@ export const Cart = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 border rounded-lg">
+              {cartItems.map((item, index) => (
+                <div key={`${item.id}-${item.selectedColor}-${item.selectedSize}-${index}`} className="flex gap-4 p-4 border rounded-lg">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -51,6 +51,12 @@ export const Cart = () => {
                     <h3 className="font-semibold">{item.name}</h3>
                     <p className="text-sm text-muted-foreground">{item.brand}</p>
                     <p className="text-sm text-muted-foreground capitalize">{item.subcategory}</p>
+                    {item.selectedColor && (
+                      <p className="text-sm text-muted-foreground">Color: {item.selectedColor}</p>
+                    )}
+                    {item.selectedSize && (
+                      <p className="text-sm text-muted-foreground">Size: {item.selectedSize}</p>
+                    )}
                     
                     <div className="flex items-center justify-between mt-2">
                       <span className="font-bold">₹{item.price.toLocaleString()}</span>
@@ -101,9 +107,14 @@ export const Cart = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span>{item.name} x {item.quantity}</span>
+                {cartItems.map((item, index) => (
+                  <div key={`${item.id}-${item.selectedColor}-${item.selectedSize}-${index}`} className="flex justify-between text-sm">
+                    <span>
+                      {item.name} x {item.quantity}
+                      {item.selectedColor && ` (${item.selectedColor}`}
+                      {item.selectedSize && `${item.selectedColor ? ', ' : ' ('}${item.selectedSize}`}
+                      {(item.selectedColor || item.selectedSize) && ')'}
+                    </span>
                     <span>₹{(item.price * item.quantity).toLocaleString()}</span>
                   </div>
                 ))}

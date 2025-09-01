@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Product } from '@/data/mockData';
 import { useToast } from '@/hooks/use-toast';
 import { useCart } from '@/contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductCardProps {
   product: Product;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { toast } = useToast();
   const { addToCart, isInCart } = useCart();
+  const navigate = useNavigate();
   const productInCart = isInCart(product.id);
 
   const handleAddToCart = () => {
@@ -23,7 +25,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const handleGoToCart = () => {
-    window.location.href = '/cart';
+    navigate('/cart');
   };
 
   const discountPercentage = product.originalPrice 
@@ -31,7 +33,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     : 0;
 
   return (
-    <div className="group relative bg-card rounded-lg overflow-hidden shadow-card hover:shadow-product transition-all duration-300 transform hover:-translate-y-1">
+    <div 
+      className="group relative bg-card rounded-lg overflow-hidden shadow-card hover:shadow-product transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+      onClick={() => navigate(`/product/${product.id}`)}
+    >
       {/* Image Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-accent">
         <img
@@ -55,17 +60,21 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           size="icon"
           variant="secondary"
           className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 hover:bg-white"
+          onClick={(e) => e.stopPropagation()}
         >
           <Heart className="h-4 w-4" />
         </Button>
 
-        {/* Quick Add to Cart / Go to Cart */}
+        {/* Quick View Details Button */}
         <Button
-          onClick={productInCart ? handleGoToCart : handleAddToCart}
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/product/${product.id}`);
+          }}
           className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 gradient-primary text-primary-foreground"
         >
           <ShoppingCart className="h-4 w-4 mr-2" />
-          {productInCart ? 'Go to Cart' : 'Add to Cart'}
+          View Details
         </Button>
       </div>
 
