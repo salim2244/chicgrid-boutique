@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ShoppingBag, User, Search, Menu, X } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -12,10 +13,19 @@ import {
 import { categories } from '@/data/mockData';
 import { AuthModal } from './AuthModal';
 
-export const Header = () => {
+interface HeaderProps {
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+}
+
+export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [cartItems] = useState(2); // Mock cart count
+  const { getTotalItems } = useCart();
+
+  const handleCartClick = () => {
+    window.location.href = '/cart';
+  };
 
   return (
     <>
@@ -92,6 +102,8 @@ export const Header = () => {
                 <Input
                   placeholder="Search for products..."
                   className="pl-10 bg-accent border-0 focus:ring-2 focus:ring-primary"
+                  value={searchQuery}
+                  onChange={(e) => onSearchChange(e.target.value)}
                 />
               </div>
             </div>
@@ -114,11 +126,11 @@ export const Header = () => {
                 <User className="h-5 w-5" />
               </Button>
               
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative" onClick={handleCartClick}>
                 <ShoppingBag className="h-5 w-5" />
-                {cartItems > 0 && (
+                {getTotalItems() > 0 && (
                   <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-secondary text-secondary-foreground text-xs flex items-center justify-center font-medium">
-                    {cartItems}
+                    {getTotalItems()}
                   </span>
                 )}
               </Button>
@@ -134,6 +146,8 @@ export const Header = () => {
                   <Input
                     placeholder="Search for products..."
                     className="pl-10 bg-accent border-0"
+                    value={searchQuery}
+                    onChange={(e) => onSearchChange(e.target.value)}
                   />
                 </div>
                 

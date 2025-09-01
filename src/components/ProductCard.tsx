@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Product } from '@/data/mockData';
 import { useToast } from '@/hooks/use-toast';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
@@ -10,12 +11,19 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { toast } = useToast();
+  const { addToCart, isInCart } = useCart();
+  const productInCart = isInCart(product.id);
 
   const handleAddToCart = () => {
+    addToCart(product);
     toast({
       title: "Added to Cart",
       description: `${product.name} has been added to your cart.`,
     });
+  };
+
+  const handleGoToCart = () => {
+    window.location.href = '/cart';
   };
 
   const discountPercentage = product.originalPrice 
@@ -51,13 +59,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Heart className="h-4 w-4" />
         </Button>
 
-        {/* Quick Add to Cart */}
+        {/* Quick Add to Cart / Go to Cart */}
         <Button
-          onClick={handleAddToCart}
+          onClick={productInCart ? handleGoToCart : handleAddToCart}
           className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 gradient-primary text-primary-foreground"
         >
           <ShoppingCart className="h-4 w-4 mr-2" />
-          Add to Cart
+          {productInCart ? 'Go to Cart' : 'Add to Cart'}
         </Button>
       </div>
 

@@ -1,22 +1,20 @@
-import { useState } from 'react';
 import { Header } from '@/components/Header';
-import { Hero } from '@/components/Hero';
-import { ProductGrid } from '@/components/ProductGrid';
+import { Cart } from '@/components/Cart';
 import { Footer } from '@/components/Footer';
+import { useState } from 'react';
 
-const Index = () => {
+const CartPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <main className="flex-1">
-        <Hero />
-        <ProductGrid searchQuery={searchQuery} />
+        <Cart />
       </main>
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default CartPage;

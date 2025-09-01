@@ -1,8 +1,24 @@
 import { ProductCard } from './ProductCard';
 import { mockProducts } from '@/data/mockData';
 
-export const ProductGrid = () => {
-  const featuredProducts = mockProducts.filter(product => product.featured);
+interface ProductGridProps {
+  searchQuery?: string;
+}
+
+export const ProductGrid = ({ searchQuery }: ProductGridProps) => {
+  const filteredProducts = mockProducts.filter(product => {
+    if (!searchQuery) return true;
+    
+    const query = searchQuery.toLowerCase();
+    return (
+      product.name.toLowerCase().includes(query) ||
+      product.brand.toLowerCase().includes(query) ||
+      product.subcategory.toLowerCase().includes(query) ||
+      product.description.toLowerCase().includes(query)
+    );
+  });
+  
+  const featuredProducts = filteredProducts.filter(product => product.featured);
 
   return (
     <section className="py-16 px-4">
@@ -21,12 +37,20 @@ export const ProductGrid = () => {
         </div>
 
         <div className="text-center mb-16">
-          <h3 className="text-3xl font-bold mb-8">All Products</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {mockProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <h3 className="text-3xl font-bold mb-8">
+            {searchQuery ? `Search Results for "${searchQuery}"` : 'All Products'}
+          </h3>
+          {filteredProducts.length === 0 ? (
+            <p className="text-muted-foreground text-lg">
+              No products found matching your search.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
