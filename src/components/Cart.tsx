@@ -6,6 +6,8 @@ import { useCart } from '@/contexts/CartContext';
 
 export const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, getTotalPrice, getTotalItems } = useCart();
+  
+  console.log('Cart component - cartItems:', cartItems);
 
   if (cartItems.length === 0) {
     return (

@@ -6,17 +6,23 @@ interface ProductGridProps {
 }
 
 export const ProductGrid = ({ searchQuery }: ProductGridProps) => {
+  console.log('ProductGrid searchQuery:', searchQuery);
+  
   const filteredProducts = mockProducts.filter(product => {
     if (!searchQuery) return true;
     
     const query = searchQuery.toLowerCase();
-    return (
+    const matches = (
       product.name.toLowerCase().includes(query) ||
       product.brand.toLowerCase().includes(query) ||
       product.subcategory.toLowerCase().includes(query) ||
       product.description.toLowerCase().includes(query)
     );
+    console.log(`Product ${product.name} matches "${query}":`, matches);
+    return matches;
   });
+  
+  console.log('Filtered products:', filteredProducts.length);
   
   const featuredProducts = filteredProducts.filter(product => product.featured);
 
