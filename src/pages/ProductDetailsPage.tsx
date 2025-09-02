@@ -61,7 +61,7 @@ const ProductDetailsPage = () => {
   const discount = product.originalPrice ? 
     Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
 
-  const isProductInCart = isInCart(product.id);
+  const isProductInCart = selectedColor && selectedSize ? isInCart(product.id, selectedColor, selectedSize) : false;
 
   return (
     <div className="min-h-screen flex flex-col">

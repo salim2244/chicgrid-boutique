@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, User, Search, Menu, X } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
@@ -22,9 +23,10 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { getTotalItems } = useCart();
+  const navigate = useNavigate();
 
   const handleCartClick = () => {
-    window.location.href = '/cart';
+    navigate('/cart');
   };
 
   return (

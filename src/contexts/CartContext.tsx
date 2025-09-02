@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/data/mockData';
 
 export interface CartItem extends Product {
@@ -38,7 +38,13 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
 
   const addToCart = (
     product: Product,
@@ -135,6 +141,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
+
+  // Save to localStorage whenever cartItems changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
 
   return (
     <CartContext.Provider
