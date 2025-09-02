@@ -3,8 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCart } from '@/contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Cart = () => {
+  const navigate = useNavigate();
   const {
     cartItems,
     updateQuantity,
@@ -45,14 +47,26 @@ export const Cart = () => {
                   key={`${item.id}-${item.selectedColor}-${item.selectedSize}-${index}`}
                   className="flex gap-4 p-4 border rounded-lg"
                 >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-24 object-cover rounded-md"
-                  />
+                   <img
+                     src={item.image}
+                     alt={item.name}
+                     className="w-20 h-24 object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity"
+                     onClick={() => {
+                       navigate(`/product/${item.id}`);
+                       window.scrollTo(0, 0);
+                     }}
+                   />
 
-                  <div className="flex-1">
-                    <h3 className="font-semibold">{item.name}</h3>
+                   <div className="flex-1">
+                     <h3 
+                       className="font-semibold cursor-pointer hover:text-primary transition-colors"
+                       onClick={() => {
+                         navigate(`/product/${item.id}`);
+                         window.scrollTo(0, 0);
+                       }}
+                     >
+                       {item.name}
+                     </h3>
                     <p className="text-sm text-muted-foreground">{item.brand}</p>
                     <p className="text-sm text-muted-foreground capitalize">
                       {item.subcategory}
@@ -180,7 +194,10 @@ export const Cart = () => {
 
               <Button 
                 className="w-full gradient-primary text-primary-foreground"
-                onClick={() => window.location.href = '/checkout'}
+                onClick={() => {
+                  navigate('/checkout');
+                  window.scrollTo(0, 0);
+                }}
               >
                 Proceed to Checkout
               </Button>
