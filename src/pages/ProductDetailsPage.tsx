@@ -74,7 +74,7 @@ const ProductDetailsPage = () => {
             className="mb-6"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Products
+            Back to Home
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

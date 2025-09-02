@@ -29,8 +29,7 @@ export const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2">
           <Card>
@@ -179,7 +178,10 @@ export const Cart = () => {
                 <span>₹{getTotalPrice().toLocaleString()}</span>
               </div>
 
-              <Button className="w-full gradient-primary text-primary-foreground">
+              <Button 
+                className="w-full gradient-primary text-primary-foreground"
+                onClick={() => window.location.href = '/checkout'}
+              >
                 Proceed to Checkout
               </Button>
 
@@ -194,6 +196,5 @@ export const Cart = () => {
           </Card>
         </div>
       </div>
-    </div>
   );
 };

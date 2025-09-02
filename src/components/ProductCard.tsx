@@ -62,7 +62,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div
       className="group relative bg-card rounded-lg overflow-hidden shadow-card hover:shadow-product transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
-      onClick={() => navigate(`/product/${product.id}`)}
+      onClick={() => {
+        navigate(`/product/${product.id}`);
+        window.scrollTo(0, 0);
+      }}
     >
       {/* Image */}
       <div className="relative aspect-[3/4] overflow-hidden bg-accent">
