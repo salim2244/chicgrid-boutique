@@ -74,26 +74,36 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-foreground hover:text-primary transition-smooth">
-                    {categories.clothing.title}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 w-[400px] bg-popover">
-                      <div className="grid gap-2">
-                        {categories.clothing.subcategories.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className="block select-none rounded-md p-3 leading-none hover:bg-accent hover:text-accent-foreground transition-smooth"
-                          >
-                            <div className="text-sm font-medium">{item.name}</div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                 <NavigationMenuItem>
+                   <NavigationMenuTrigger className="text-foreground hover:text-primary transition-smooth">
+                     {categories.clothing.title}
+                   </NavigationMenuTrigger>
+                   <NavigationMenuContent>
+                     <div className="grid gap-3 p-6 w-[400px] bg-popover">
+                       <div className="grid gap-2">
+                         {categories.clothing.subcategories.map((item) => (
+                           <a
+                             key={item.name}
+                             href={item.href}
+                             className="block select-none rounded-md p-3 leading-none hover:bg-accent hover:text-accent-foreground transition-smooth"
+                           >
+                             <div className="text-sm font-medium">{item.name}</div>
+                           </a>
+                         ))}
+                       </div>
+                     </div>
+                   </NavigationMenuContent>
+                 </NavigationMenuItem>
+
+                 <NavigationMenuItem>
+                   <Button
+                     variant="ghost"
+                     onClick={() => navigate('/admin')}
+                     className="text-foreground hover:text-primary transition-smooth"
+                   >
+                     Admin
+                   </Button>
+                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
@@ -153,27 +163,38 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
                   />
                 </div>
                 
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                    Categories
-                  </h3>
-                  {Object.values(categories).map((category) => (
-                    <div key={category.title}>
-                      <h4 className="font-medium py-2">{category.title}</h4>
-                      <div className="pl-4 space-y-1">
-                        {category.subcategories.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className="block py-2 text-sm text-muted-foreground hover:text-foreground transition-smooth"
-                          >
-                            {item.name}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                     <div className="space-y-2">
+                       <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                         Categories
+                       </h3>
+                       {Object.values(categories).map((category) => (
+                         <div key={category.title}>
+                           <h4 className="font-medium py-2">{category.title}</h4>
+                           <div className="pl-4 space-y-1">
+                             {category.subcategories.map((item) => (
+                               <a
+                                 key={item.name}
+                                 href={item.href}
+                                 className="block py-2 text-sm text-muted-foreground hover:text-foreground transition-smooth"
+                               >
+                                 {item.name}
+                               </a>
+                             ))}
+                           </div>
+                         </div>
+                       ))}
+                       
+                       <Button
+                         variant="ghost"
+                         onClick={() => {
+                           navigate('/admin');
+                           setIsMenuOpen(false);
+                         }}
+                         className="w-full justify-start text-left mt-4"
+                       >
+                         Admin Dashboard
+                       </Button>
+                     </div>
               </div>
             </div>
           )}

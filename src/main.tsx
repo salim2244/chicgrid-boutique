@@ -8,6 +8,7 @@ import Index from './pages/Index'
 import CartPage from './pages/CartPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import CheckoutPage from './pages/CheckoutPage'
+import AdminPage from './pages/AdminPage'
 
 // Scroll to top component
 function ScrollToTop() {
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/product/:id" element={<ProductDetailsPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
         <Toaster />
       </BrowserRouter>
