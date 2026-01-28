@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Search, Menu, X } from 'lucide-react';
+import { ShoppingBag, User, Search, Menu, X, LogOut } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -12,8 +13,6 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { categories } from '@/data/mockData';
-import { AuthModal } from './AuthModal';
-
 interface HeaderProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
@@ -21,12 +20,20 @@ interface HeaderProps {
 
 export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { getTotalItems } = useCart();
+  const { user, isAdmin, signOut } = useAuth();
   const navigate = useNavigate();
 
   const handleCartClick = () => {
     navigate('/cart');
+  };
+
+  const handleAuthClick = () => {
+    if (user) {
+      signOut();
+    } else {
+      navigate('/auth');
+    }
   };
 
   return (
@@ -95,15 +102,17 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
                    </NavigationMenuContent>
                  </NavigationMenuItem>
 
-                 <NavigationMenuItem>
-                   <Button
-                     variant="ghost"
-                     onClick={() => navigate('/admin')}
-                     className="text-foreground hover:text-primary transition-smooth"
-                   >
-                     Admin
-                   </Button>
-                 </NavigationMenuItem>
+                 {isAdmin && (
+                   <NavigationMenuItem>
+                     <Button
+                       variant="ghost"
+                       onClick={() => navigate('/admin')}
+                       className="text-foreground hover:text-primary transition-smooth"
+                     >
+                       Admin
+                     </Button>
+                   </NavigationMenuItem>
+                 )}
               </NavigationMenuList>
             </NavigationMenu>
 
@@ -133,9 +142,10 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsAuthOpen(true)}
+                onClick={handleAuthClick}
+                title={user ? 'Sign Out' : 'Sign In'}
               >
-                <User className="h-5 w-5" />
+                {user ? <LogOut className="h-5 w-5" /> : <User className="h-5 w-5" />}
               </Button>
               
               <Button variant="ghost" size="icon" className="relative" onClick={handleCartClick}>
@@ -184,24 +194,24 @@ export const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
                          </div>
                        ))}
                        
-                       <Button
-                         variant="ghost"
-                         onClick={() => {
-                           navigate('/admin');
-                           setIsMenuOpen(false);
-                         }}
-                         className="w-full justify-start text-left mt-4"
-                       >
-                         Admin Dashboard
-                       </Button>
+                       {isAdmin && (
+                         <Button
+                           variant="ghost"
+                           onClick={() => {
+                             navigate('/admin');
+                             setIsMenuOpen(false);
+                           }}
+                           className="w-full justify-start text-left mt-4"
+                         >
+                           Admin Dashboard
+                         </Button>
+                       )}
                      </div>
               </div>
             </div>
           )}
         </div>
       </header>
-
-      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </>
   );
 };
